@@ -39,5 +39,14 @@ jobs:
       run: |
         dotnet tool install --global dotnet-ef
         dotnet ef migrations script --configuration Release --no-build --idempotent --startup-project Soat.AntiGaspi.Api --output postgres/00_init.sql
+    
     - name: Run Tests
       run: dotnet test -c Release --no-build --verbosity normal -l:trx;LogFileName=TestOutput.trx
+    
+    - name: Publish tests results
+      uses: dorny/test-reporter@v1
+      if: success() || failure()     
+      with:
+        name: Test report             
+        path: './src/Soat.AntiGaspi.Api.Tests/TestResults/*.trx'
+        reporter: dotnet-trx
