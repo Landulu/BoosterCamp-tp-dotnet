@@ -39,3 +39,5 @@ jobs:
       run: |
         dotnet tool install --global dotnet-ef
         dotnet ef migrations script --configuration Release --no-build --idempotent --startup-project Soat.AntiGaspi.Api --output postgres/00_init.sql
+    - name: Run Tests
+      run: dotnet test -c Release --no-build --verbosity normal -l:trx;LogFileName=TestOutput.trx
