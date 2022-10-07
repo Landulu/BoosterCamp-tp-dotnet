@@ -398,3 +398,8 @@ FodyWeavers.xsd
 *.sln.iml
 *.exe
 *.tfstate
+
+# Angular compiled output  
+/front/dist 
+/front/tmp 
+/front/out-tsc
