@@ -10,6 +10,8 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        
+        var dbConnectionString = builder.Configuration["db_connection_string"];
 
         builder.Services
             .AddControllers()
@@ -25,7 +27,7 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddDbContext<AntiGaspiContext>(options =>
-            options.UseNpgsql(builder.Configuration["POSTGRESQLCONNSTR_AntiGaspi"]));
+            options.UseNpgsql(dbConnectionString));
 
         builder.Services.AddCors(options =>
         {
