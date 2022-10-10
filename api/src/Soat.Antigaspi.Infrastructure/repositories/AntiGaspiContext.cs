@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Soat.AntiGaspi.Api.Models;
 using Soat.AntiGaspi.Api.Repository.Configurations;
+using Soat.AntiGaspi.Domain.Offers;
 
 namespace Soat.AntiGaspi.Api.Repository
 {
@@ -20,6 +20,11 @@ namespace Soat.AntiGaspi.Api.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new OffersTypeConfiguration());
+        }
+
+        public Guid GetNextId()
+        {
+            return Guid.NewGuid();
         }
     }
 }

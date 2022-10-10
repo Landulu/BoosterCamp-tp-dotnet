@@ -1,4 +1,4 @@
-﻿namespace Soat.AntiGaspi.Api.Models;
+namespace Soat.AntiGaspi.Domain.Offers;
 
 public enum OfferStatus
 {

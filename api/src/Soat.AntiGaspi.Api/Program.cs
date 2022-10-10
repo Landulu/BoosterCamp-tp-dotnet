@@ -1,7 +1,10 @@
+using System.Reflection;
 using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Soat.AntiGaspi.Api.Repository;
 using Soat.AntiGaspi.Api.Time;
+using Soat.Antigaspi.Application.DependencyInjections;
 
 namespace Soat.AntiGaspi.Api;
 
@@ -25,8 +28,13 @@ public class Program
         builder.Services.AddAutoMapper(typeof(Program));
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        
+        builder.Services.AddCustomServices();
 
+        //builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+        
         builder.Services.AddDbContext<AntiGaspiContext>(options =>
+            
             options.UseNpgsql(dbConnectionString));
 
         builder.Services.AddCors(options =>

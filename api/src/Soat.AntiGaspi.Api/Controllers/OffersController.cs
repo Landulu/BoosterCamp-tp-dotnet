@@ -1,19 +1,20 @@
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Soat.AntiGaspi.Api.Contracts;
-using Soat.AntiGaspi.Api.Models;
 using Soat.AntiGaspi.Api.Repository;
+using Soat.Antigaspi.Application.UseCases.Offers;
 
 namespace Soat.AntiGaspi.Api.Controllers
 {
     [ApiController]
-    [Route("/api/offers")]
-    public class OffersController : ControllerBase
+    public class OffersController : ApiControllerBase
     {
         private readonly ILogger<OffersController> _logger;
         private readonly AntiGaspiContext _antiGaspiContext;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
+        
 
         public OffersController(
             AntiGaspiContext antiGaspiContext,
@@ -30,23 +31,27 @@ namespace Soat.AntiGaspi.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GetOfferResponse>> Get(Guid id)
         {
-            Offer? offer = await _antiGaspiContext.Offers.FindAsync(id);
-            if (offer is null)
-            {
-                return NotFound();
-            }
+            //Offer? offer = await _antiGaspiContext.Offers.FindAsync(id);
+            //if (offer is null)
+            //{
+            //    return NotFound();
+            //}
 
-            return Ok(_mapper.Map<GetOfferResponse>(offer));
+            //return Ok(_mapper.Map<GetOfferResponse>(offer));
+            return Ok();
         }
 
         [HttpPost("")]
         public async Task<IActionResult> Create([FromBody] CreateOfferRequest createOfferRequest)
         {
-            Offer offer = _mapper.Map<Offer>(createOfferRequest);
-            _antiGaspiContext.Add(offer);
-            await _antiGaspiContext.SaveChangesAsync();
+            
+            CreateOfferCommand offer = _mapper.Map<CreateOfferCommand>(createOfferRequest);
 
-            return CreatedAtAction(nameof(Get), new { id = offer.Id }, offer.Id);
+            var offerId = await Mediator.Send(offer);
+            //_antiGaspiContext.Add(offer);
+            //await _antiGaspiContext.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(Get), new { id = offerId }, offerId);
         }
     }
 }
