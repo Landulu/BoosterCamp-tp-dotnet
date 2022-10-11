@@ -12,12 +12,14 @@
 		<PackageReference Include="AutoMapper" Version="11.0.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 		<PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.9">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0-rc.1.22426.10" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.7" />
@@ -33,7 +35,12 @@
 
 	<ItemGroup>
 	  <Folder Include="Constants\" />
-	  <Folder Include="Repository\Migrations\" />
+	  <Folder Include="Models" />
+	  <Folder Include="Repository" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Soat.Antigaspi.Application\Soat.Antigaspi.Application.csproj" />
 	</ItemGroup>
 
 </Project>

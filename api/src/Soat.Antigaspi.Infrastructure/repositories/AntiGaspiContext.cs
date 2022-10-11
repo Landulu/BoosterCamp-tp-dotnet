@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Soat.AntiGaspi.Api.Models;
-using Soat.AntiGaspi.Api.Repository.Configurations;
+using Soat.Antigaspi.Infrastructure.repositories.Configurations;
+using Soat.Antigaspi.Infrastructure.repositories.Entities;
 
-namespace Soat.AntiGaspi.Api.Repository
+namespace Soat.Antigaspi.Infrastructure.repositories
 {
     public class AntiGaspiContext : DbContext
     {
@@ -21,5 +21,7 @@ namespace Soat.AntiGaspi.Api.Repository
         {
             modelBuilder.ApplyConfiguration(new OffersTypeConfiguration());
         }
+
+        
     }
 }

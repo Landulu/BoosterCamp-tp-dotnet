@@ -1,18 +1,21 @@
-﻿namespace Soat.AntiGaspi.Api.Contracts;
-
-public class CreateOfferRequest
+﻿namespace Soat.AntiGaspi.Api.Contracts
 {
-    public string? Title { get; init; }
 
-    public string? Description { get; init; }
+    public class CreateOfferRequest
+    {
+        public string? Title { get; init; }
 
-    public string? Email { get; init; }
+        public string? Description { get; init; }
 
-    public string? CompanyName { get; init; }
+        public string? Email { get; init; }
 
-    public string? Address { get; init; }
+        public string? CompanyName { get; init; }
 
-    public DateTime? Availability { get; init; }
+        public string? Address { get; init; }
 
-    public DateTime? Expiration { get; init; }
+        public DateTime? Availability { get; init; }
+
+        public DateTime? Expiration { get; init; }
+    }
+    
 }

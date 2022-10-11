@@ -1,8 +1,8 @@
-﻿namespace Soat.AntiGaspi.Api.Repository.Configurations;
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Soat.AntiGaspi.Api.Models;
+using Soat.Antigaspi.Infrastructure.repositories.Entities;
+
+namespace Soat.Antigaspi.Infrastructure.repositories.Configurations;
 
 public class OffersTypeConfiguration : IEntityTypeConfiguration<Offer>
 {
