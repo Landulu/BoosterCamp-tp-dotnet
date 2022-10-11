@@ -1,7 +1,6 @@
 using System.Reflection;
 using AutoMapper;
 using MediatR;
-using Soat.AntiGaspi.Api.Repository;
 using Soat.Antigaspi.Application.UseCases.dtos;
 using Soat.AntiGaspi.Domain.Offers;
 
@@ -25,7 +24,7 @@ public class CreateOfferCommand : IRequest<CreatedResponse>
 
     public DateTime? Expiration { get; set; }
 
-    public OfferStatus Status { get; set; }
+    public AntiGaspi.Domain.Offers.OfferStatus Status { get; set; }
 }
 
 public enum OfferStatus
@@ -39,31 +38,32 @@ public enum OfferStatus
 public class CreateOfferCommandHandler : IRequestHandler<CreateOfferCommand, CreatedResponse>
 {
     
-    private readonly AntiGaspiContext _antiGaspiContext;
+    private readonly IOffers _offers;
     
     private readonly IMapper _mapper;
 
-    public CreateOfferCommandHandler(AntiGaspiContext antiGaspiContext, IMapper mapper)
+    public CreateOfferCommandHandler( IMapper mapper, IOffers offers)
     {
-        _antiGaspiContext = antiGaspiContext;
         _mapper = mapper;
+        _offers = offers;
     }
 
     public async Task<CreatedResponse> Handle(CreateOfferCommand request, CancellationToken cancellationToken)
     {
-        var id = _antiGaspiContext.GetNextId();
-        var newOffer = new Offer();
-        newOffer.Id = id;
-        newOffer.Address = request.Address;
-        newOffer.Availability = request.Availability;
-        newOffer.Description = request.Description;
-        newOffer.Title = request.Title;
-        newOffer.Email = request.Email;
-        newOffer.CompanyName = request.CompanyName;
-        newOffer.Status = (AntiGaspi.Domain.Offers.OfferStatus)request.Status;
+        var id = _offers.GetNextId();
+        var newOffer = new OfferWriteDto(
+            id, 
+            request.Title, 
+            request.Description, 
+            request.Address, 
+            request.Email, 
+            request.CompanyName, 
+            request.Availability, 
+            request.Expiration, 
+            request.Status);
         
-        _antiGaspiContext.Add(newOffer);
-        await _antiGaspiContext.SaveChangesAsync();
+        _offers.Add(newOffer);
+        await _offers.SaveChangesAsync();
 
         return new CreatedResponse()
         {

@@ -1,10 +1,8 @@
-using System.Reflection;
 using FluentValidation.AspNetCore;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Soat.AntiGaspi.Api.Repository;
+using Soat.AntiGaspi.Api.DependencyInjections;
 using Soat.AntiGaspi.Api.Time;
-using Soat.Antigaspi.Application.DependencyInjections;
+using Soat.Antigaspi.Infrastructure.repositories;
 
 namespace Soat.AntiGaspi.Api;
 
@@ -31,11 +29,11 @@ public class Program
         
         builder.Services.AddCustomServices();
 
-        //builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-        
+        builder.Services.AddCustomRepositories();
+
         builder.Services.AddDbContext<AntiGaspiContext>(options =>
-            
-            options.UseNpgsql(dbConnectionString));
+            options.UseNpgsql(dbConnectionString)
+            );
 
         builder.Services.AddCors(options =>
         {

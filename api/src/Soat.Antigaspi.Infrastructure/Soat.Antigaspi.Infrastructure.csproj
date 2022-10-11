@@ -7,6 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Reference Include="AutoMapper">
+        <HintPath>..\..\..\..\..\..\.nuget\packages\automapper\11.0.1\lib\netstandard2.1\AutoMapper.dll</HintPath>
+      </Reference>
       <Reference Include="Microsoft.EntityFrameworkCore">
         <HintPath>..\..\..\..\..\..\.nuget\packages\microsoft.entityframeworkcore\6.0.9\lib\net6.0\Microsoft.EntityFrameworkCore.dll</HintPath>
       </Reference>
@@ -27,6 +30,10 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="data" />
     </ItemGroup>
 
 </Project>

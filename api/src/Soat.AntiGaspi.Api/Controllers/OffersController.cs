@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Soat.AntiGaspi.Api.Contracts;
 using Soat.AntiGaspi.Api.Repository;
 using Soat.Antigaspi.Application.UseCases.Offers;
+using Soat.Antigaspi.Infrastructure.repositories;
 
 namespace Soat.AntiGaspi.Api.Controllers
 {
