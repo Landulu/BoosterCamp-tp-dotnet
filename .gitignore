@@ -399,7 +399,25 @@ FodyWeavers.xsd
 *.exe
 *.tfstate
 
-# Angular compiled output  
-/front/dist 
-/front/tmp 
-/front/out-tsc
+# React
+
+# dependencies
+font/.pnp
+font/.pnp.js
+
+# testing
+font/coverage
+
+# production
+font/build
+
+# misc
+font/.DS_Store
+font/.env.local
+font/.env.development.local
+font/.env.test.local
+font/.env.production.local
+
+font/npm-debug.log*
+font/yarn-debug.log*
+font/yarn-error.log*
