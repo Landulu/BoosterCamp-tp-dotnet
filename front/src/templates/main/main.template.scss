@@ -1,0 +1,13 @@
+.main-template {
+
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .container {
+        height: 100%;
+        padding: 20px;
+        overflow-y: auto;
+    }
+}

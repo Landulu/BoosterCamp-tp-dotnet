@@ -157,3 +157,54 @@ obj/
 /wwwroot/node_modules
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Rider,JetBrains,DotnetCore
+# Ionide (cross platform F# VS Code tools) working folder
+.ionide/
+
+# Fody - auto-generated XML schema
+FodyWeavers.xsd
+
+# VS Code files for those working on multiple tools
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+# Windows Installer files from build outputs
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# JetBrains Rider
+*.sln.iml
+*.exe
+*.tfstate
+
+# React
+
+# dependencies
+front/.pnp
+front/.pnp.js
+
+# testing
+front/coverage
+
+# production
+front/build
+
+# misc
+front/.DS_Store
+front/.env.local
+front/.env.development.local
+front/.env.test.local
+front/.env.production.local
+
+front/npm-debug.log*
+front/yarn-debug.log*
+front/yarn-error.log*

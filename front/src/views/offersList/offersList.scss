@@ -1,0 +1,20 @@
+.offer-container {
+
+    max-width: 1024px;
+    margin: 0 auto;
+
+    .offer-list {
+
+        margin-bottom: 40px;
+
+        @media (min-width: 960px) {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 20px;
+        }
+    }
+
+    .offer-pagination {
+        background-color: yellow;
+    }
+}
