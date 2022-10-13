@@ -37,13 +37,15 @@ const Header = () => {
 
     return (
         <header className='header'>
-            <div className="logo">Anti Gaspi</div>
-            <nav className='nav-bar'>
-                {
-                    nav.sort((a,b) => a.order - b.order)
-                    .map(link => <Link key={link.id} {...link} handleClick={(e) => handleClick(e, link.id)} />)
-                }
-            </nav>
+            <div className="sub-header">
+                <div className="logo">Anti Gaspi</div>
+                <nav className='nav-bar'>
+                    {
+                        nav.sort((a,b) => a.order - b.order)
+                        .map(link => <Link key={link.id} {...link} handleClick={(e) => handleClick(e, link.id)} />)
+                    }
+                </nav>
+            </div>
         </header>
     )
 }

@@ -1,8 +1,13 @@
 .header {
+    background: #333;
+
+    .sub-header {
+        max-width: 1024px;
+        margin: 0 auto;
+    }
 
     .logo {
         height: 70px;
-        background: #333;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -14,8 +19,10 @@
 
     .nav-bar {
         height: 60px;
-        background-color: #333;
         display: flex;
+
+        border-top: 1px solid #272727;
+        box-shadow: 1px 3px 3px rgba(#000, .1);
 
         .link {
             position: relative;
@@ -23,9 +30,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
-            border-top: 1px solid #272727;
-            box-shadow: 1px 5px 5px rgba(#272727, .2);
 
             font-size: 18px;
             color: #ccc;
@@ -54,5 +58,30 @@
                 }
             }
         }
+    }
+
+
+    @media (min-width: 960px) {
+        .sub-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+
+        .nav-bar {
+            height: 70px;
+            border-top: 0px;
+            box-shadow: none;
+    
+            .link {
+                width: inherit;
+                margin-left: 20px;
+    
+                &::before {
+                    display: none;
+                }
+            }
+        }
+
     }
 }
