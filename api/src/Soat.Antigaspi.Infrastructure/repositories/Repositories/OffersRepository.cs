@@ -49,9 +49,26 @@ public class OffersRepository : IOffers
         await _context.SaveChangesAsync();
     }
 
-    public OfferReadDto Get(Guid id)
+    public async Task<OfferReadDto> Get(Guid id)
     {
-        throw new NotImplementedException();
+        var offer = await _context.Offers.FindAsync(id);
+
+        if (offer is null)
+        {
+            throw new KeyNotFoundException($"offer with id {id} not found");
+        } 
+        
+        return new OfferReadDto(
+            offer.Id,
+            offer.Title,
+            offer.Description,
+            offer.Address,
+            offer.Email,
+            offer.CompanyName,
+            offer.Availability,
+            offer.Expiration,
+            offer.Status
+        );
     }
 
     public ICollection<OfferReadDto> GetAll()

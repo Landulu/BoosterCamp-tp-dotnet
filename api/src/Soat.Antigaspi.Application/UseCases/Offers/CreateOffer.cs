@@ -9,8 +9,7 @@ namespace Soat.Antigaspi.Application.UseCases.Offers;
 
 public class CreateOfferCommand : IRequest<CreatedResponse>
 {
-    public Guid Id { get; set; }
-
+    
     public string Title { get; set; } = default!;
 
     public string Description { get; set; } = default!;

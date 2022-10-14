@@ -21,7 +21,7 @@ public class Offer
 
     public OfferStatus Status { get; private set; }
 
-    private Offer(OfferId id, string title, string description, string email, string companyName, string address, DateTime? availability, DateTime? expiration, OfferStatus status)
+    public Offer(OfferId id, string title, string description, string email, string companyName, string address, DateTime? availability, DateTime? expiration, OfferStatus status)
     {
         Id = id;
         Title = title;
@@ -34,7 +34,7 @@ public class Offer
         Status = status;
     }
 
-    public Offer CreateNew(OfferId id, string title, string description, string email, string companyName, string address,
+    public static Offer CreateNew(OfferId id, string title, string description, string email, string companyName, string address,
         DateTime? availability, DateTime? expiration)
     {
         return new Offer(
