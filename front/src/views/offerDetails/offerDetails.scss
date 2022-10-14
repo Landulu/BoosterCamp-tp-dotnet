@@ -1,0 +1,110 @@
+.offer-details {
+
+    max-width: 1024px;
+    margin: 0 auto;
+
+    .offfer-header {
+
+        .image-container {
+
+            border-radius: 3px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 1px 1px 5px rgba(#000, .2);
+
+            margin-bottom: 20px;
+
+            img {
+                width: 100%;
+            }
+        
+        }
+
+        .text-container {
+
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+
+            .title {
+                font-size: 22px;
+                font-weight: bold;
+                color: #ccc;
+                margin-bottom: 20px;
+            }
+        
+            .middle {
+                margin-bottom: 20px;
+                height: 100%;
+        
+                .description {
+                    font-size: 16px;
+                    color: #ccc;
+                    margin-bottom: 10px;
+                }
+                .companyName {
+                    position: relative;
+            
+                    font-size: 12px;
+                    font-weight: 600;
+                    color: #1395BE;
+                    padding-left: 10px;
+            
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 50%;
+                        left: 0;
+                        transform: translateY(-50%);
+                        background-color: #1395BE;
+                        height: 5px;
+                        width: 5px;
+                        border-radius: 50%;
+                    }
+                
+                }
+            }
+        
+            .link {
+                display: block;
+                color: #ccc;
+                text-decoration: none;
+                height: 40px;
+                min-height: 40px;
+                border-radius: 3px;
+                width: 100%;
+                background-color: #1395BE;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 1px 1px 5px rgba(#000, .2);
+                border: 1px solid #1395BE;
+
+                max-width: 240px;
+        
+                transition: all linear .28s;
+        
+                &:hover {
+                    background-color: darken(#1395BE, 10);
+                    border-color: darken(#1395BE, 10);
+                }
+    
+            }
+            
+        }
+
+        @media (min-width: 960px) {
+            display: flex;
+            flex-direction: row-reverse;
+            .text-container {
+                width: 60%;
+                padding-right: 40px;
+            }
+            .image-container {
+                width: 40%;
+                margin: 0;
+            }
+        }
+
+    }
+}

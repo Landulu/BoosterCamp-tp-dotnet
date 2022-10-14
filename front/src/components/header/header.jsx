@@ -1,33 +1,40 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
 import './header.scss';
 
 const defaultNavbar = [
     {
-        id: 2,
-        title: "Créer une offre",
-        link: "#",
-        isActif: false,
-        order: 2,
-    },
-    {
         id: 1,
         title: "Offres",
-        link: "#",
-        isActif: true,
+        link: "/offers",
+        isActif: false,
         order: 1,
     }
-]
+];
 
-const Link = ({isActif, link, title, handleClick}) => (
-    <a data-actif={isActif ? true : false} className='link' href={link} onClick={handleClick} >{title}</a>
+const CustomLink = ({isActif, link, title, handleClick, id}) => (
+    <Link className='link' data-actif={isActif ? true : false} to={link} onClick={() => handleClick(id)}>{title}</Link>
 )
 
 const Header = () => {
 
-    const [nav, setNav] = useState(defaultNavbar);
+    const [nav, setNav] = useState([]);
+    const location = useLocation();
 
-    const handleClick = (event, id) => {
-        event.preventDefault();
+
+    useEffect(() => {
+
+        const newNav = defaultNavbar.map(item => {
+            if ( item.link !== location.pathname ) return item;
+            else return {...item, isActif: true};
+        }).sort((a,b) => a.order - b.order)
+
+        setNav(newNav);
+
+    }, [location]);
+
+    const handleClick = (id) => {
         const newNav = nav.map( link => {
             if ( link.id === id && !link.isActif ) return {...link, isActif: true};
             else return {...link, isActif: false};
@@ -41,8 +48,7 @@ const Header = () => {
                 <div className="logo">Anti Gaspi</div>
                 <nav className='nav-bar'>
                     {
-                        nav.sort((a,b) => a.order - b.order)
-                        .map(link => <Link key={link.id} {...link} handleClick={(e) => handleClick(e, link.id)} />)
+                        nav.map(link => <CustomLink key={link.id} {...link} id={link.id} handleClick={handleClick} />)
                     }
                 </nav>
             </div>
