@@ -1,6 +1,6 @@
-using System;
+using Soat.AntiGaspi.Domain.Offers;
 
-namespace Soat.AntiGaspi.Domaine.Offers;
+namespace Soat.AntiGaspi.Domain.Offers;
 public class Offer
 {
     public OfferId Id { get; }

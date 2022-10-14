@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Soat.Antigaspi.Application.UseCases.Offers;
 using Soat.AntiGaspi.Domain.Offers;
 using Soat.Antigaspi.Infrastructure.repositories;
+using Soat.Antigaspi.Infrastructure.repositories.Repositories;
 
 namespace Soat.AntiGaspi.Api.DependencyInjections;
 

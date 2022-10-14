@@ -28,4 +28,8 @@
       <ProjectReference Include="..\Soat.Antigaspi.Infrastructure\Soat.Antigaspi.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="UseCases\Contracts\Profiles" />
+    </ItemGroup>
+
 </Project>

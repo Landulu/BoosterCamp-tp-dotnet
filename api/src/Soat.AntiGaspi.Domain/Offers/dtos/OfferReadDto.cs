@@ -1,6 +1,4 @@
-using System;
-
-namespace Soat.AntiGaspi.Domaine.Offers.dtos;
+namespace Soat.AntiGaspi.Domain.Offers.dtos;
 
 public record OfferReadDto
 {

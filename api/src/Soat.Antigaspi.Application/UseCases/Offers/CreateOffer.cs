@@ -3,6 +3,7 @@ using AutoMapper;
 using MediatR;
 using Soat.Antigaspi.Application.UseCases.dtos;
 using Soat.AntiGaspi.Domain.Offers;
+using Soat.AntiGaspi.Domain.Offers.dtos;
 
 namespace Soat.Antigaspi.Application.UseCases.Offers;
 
@@ -62,8 +63,7 @@ public class CreateOfferCommandHandler : IRequestHandler<CreateOfferCommand, Cre
             request.Expiration, 
             request.Status);
         
-        _offers.Add(newOffer);
-        await _offers.SaveChangesAsync();
+        await _offers.Insert(newOffer);
 
         return new CreatedResponse()
         {

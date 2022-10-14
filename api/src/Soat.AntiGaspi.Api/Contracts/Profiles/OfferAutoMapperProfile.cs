@@ -1,4 +1,6 @@
-﻿using Soat.Antigaspi.Application.UseCases.Offers;
+﻿
+
+using Soat.Antigaspi.Application.UseCases.Offers;
 
 namespace Soat.AntiGaspi.Api.Contracts.Profiles;
 

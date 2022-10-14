@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Soat.AntiGaspi.Api.Repository;
+using Soat.Antigaspi.Infrastructure.repositories;
 
 #nullable disable
 
