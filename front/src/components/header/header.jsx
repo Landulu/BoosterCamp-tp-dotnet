@@ -48,8 +48,7 @@ const Header = () => {
                 <div className="logo">Anti Gaspi</div>
                 <nav className='nav-bar'>
                     {
-                        nav.sort((a,b) => a.order - b.order)
-                        .map(link => <Link key={link.id} {...link} handleClick={(e) => handleClick(e, link.id)} />)
+                        nav.map(link => <CustomLink key={link.id} {...link} id={link.id} handleClick={handleClick} />)
                     }
                 </nav>
             </div>
