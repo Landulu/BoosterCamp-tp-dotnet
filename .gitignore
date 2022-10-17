@@ -188,6 +188,9 @@ FodyWeavers.xsd
 
 # React
 
+# node modules
+front/node_modules
+
 # dependencies
 front/.pnp
 front/.pnp.js
@@ -206,9 +209,6 @@ front/.env.test.local
 front/.env.production.local
 
 front/npm-debug.log*
+front/npm-error.log*
 front/yarn-debug.log*
-<<<<<<< HEAD
 front/yarn-error.log*
-=======
-front/yarn-error.log*
->>>>>>> d2b27f4 (correction sur gitignore)
