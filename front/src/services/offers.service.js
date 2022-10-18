@@ -25,6 +25,13 @@ class OffersService {
             .catch((error) => reject(error));
         })
     }
+
+    createOffer(data) {
+        return new Promise((resolve, reject) => {
+            console.log(data);
+            resolve("hello");
+        })
+    }
 }
 
 

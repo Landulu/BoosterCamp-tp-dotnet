@@ -15,7 +15,7 @@ function App() {
       <Route path="/" element={<OffersListView OffersService={new OffersService()} />} />
       <Route path="/offers" element={<OffersListView OffersService={new OffersService()} />} />
       <Route path='/offers/:id' element={<OfferDetailsView OffersService={new OffersService} />} ></Route>
-      <Route path='/offers/create' element={<CreateOffer />} ></Route>
+      <Route path='/offers/create' element={<CreateOffer OffersService={new OffersService} />} ></Route>
     </Route>
   </Routes>
 }
