@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 
 
 const MainTemplate = () => {
+    
     return (
         <div className="main-template">
             <Header />

@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import FormInput from '../../components/form-input/form-input';
 import FormButton from '../../components/form-button/form-button';
+import {FormFeedBackSucces, FormFeedBackError } from '../../components/form-feedback/form-feedback';
 
 import './createOffer.scss';
+import { useEffect } from 'react';
 
 const inputs = [
     {
@@ -74,7 +76,7 @@ const inputs = [
     {
         label: "Adresse",
         placeholder: "e.g. 89 Quai Panhard et Levassor, 75013",
-        name: "adress",
+        name: "address",
         type: "text",
         registerParams: {
             required: "Le champ adresse est obligatoire",
@@ -95,7 +97,7 @@ const inputs = [
         type: "date",
         registerParams: {
             // valueAsDate: "Le champ disponibilité de l'offre est incorrecte",
-            valueAsDate: true,
+            // valueAsDate: true,
         }
     },
     {
@@ -105,7 +107,7 @@ const inputs = [
         type: "date",
         registerParams: {
             // valueAsDate: "Le champ expiration de l'offre est incorrecte",
-            valueAsDate: true,
+            // valueAsDate: true,
         }
     }
 ];
@@ -115,15 +117,52 @@ const CreateOfferVieuw = ({OffersService}) => {
 
     const { register, handleSubmit, formState: {errors, isValid, isSubmitting} } = useForm({mode: 'onChange'});
 
+    const [feedbackSucces, setFeedBackSucces] = useState({
+        displayed: false,
+        title: "",
+        message: "",
+    })
+    const [feedbackError, setFeedBackError] = useState({
+        display: false,
+        errors: []
+    })
+
     const onSubmit = (data) => {
-        OffersService.createOffer(data)
+        OffersService.createOffer({
+            // ...data,
+            // availability: new Date(data.availability).toISOString(),
+            // expiration: new Date(data.expiration).toISOString()
+            "title": "titre de mon offer",
+            "description": "string",
+            "email": "stringgmail.com",
+            "companyName": "string",
+            "address": "string",
+            "availability": "2023-10-18T14:42:39.562Z",
+            "expiration": "2023-09-18T14:42:39.562Z"
+        })
         .then((response) => console.log(response))
-        .catch((error) => console.log(error))
+        .catch((error) => {
+            console.log(error.data.errors)
+        })
+        // setFeedBack({...feedback, display: true});
     }
+
+    // useEffect(() => {
+    //     if ( feedback.display ) {
+    //         const feedbackTimeout = setInterval(() => {
+    //             setFeedBack({...feedback, display: false})
+    //         }, 5000)
+    //         return () => clearTimeout(feedbackTimeout);
+    //     }
+    // }, [feedback])
 
 
     return (
+        <>
+        <button onClick={onSubmit}>Submit</button>
         <form className='create-offer-form' onSubmit={handleSubmit(onSubmit)}>
+
+
 
             {
                 inputs.map(input => <FormInput
@@ -139,13 +178,27 @@ const CreateOfferVieuw = ({OffersService}) => {
                 />)
             }
 
+            {
+                feedbackSucces.displayed && <FormFeedBackSucces
+                    title={feedbackSucces.title}
+                    message={feedbackSucces.message}
+                />
+            }
+
+            {
+                feedbackError.display && <FormFeedBackError errors={feedbackError.errors} />
+            }
+
             <FormButton
                 title="Créer"
-                isSubmitting={isSubmitting}
-                isValid={isValid}
+                // isSubmitting={isSubmitting}
+                // isValid={isValid}
+                isSubmitting={false}
+                isValid={true}
             />
             
         </form>
+        </>
     )
 }
 

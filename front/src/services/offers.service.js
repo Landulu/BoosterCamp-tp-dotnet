@@ -28,8 +28,10 @@ class OffersService {
 
     createOffer(data) {
         return new Promise((resolve, reject) => {
-            console.log(data);
-            resolve("hello");
+            console.log(data)
+            axios.post(`${this.#API_URL}/offers`, data)
+            .then((response) => resolve(response))
+            .catch((error) => reject(error.response))
         })
     }
 }
