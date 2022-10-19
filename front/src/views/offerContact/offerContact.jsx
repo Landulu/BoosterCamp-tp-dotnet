@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { Link, useParams } from 'react-router-dom';
 
 import FormInput from '../../components/form-input/form-input';
 import FormButton from '../../components/form-button/form-button';
 import {FormFeedBackSucces, FormFeedBackError } from '../../components/form-feedback/form-feedback';
 
+import OfferNotFoundIcon from '../../drawables/icons/offer-not-found-icon';
+
 import './offerContact.scss';
-import { useParams } from 'react-router-dom';
 
 const inputs = [
     {
@@ -117,6 +119,7 @@ const OfferContact = ({OffersService}) => {
     const [feedbackSucces, setFeedBackSucces] = useState(defaultFeedbackValues.succes);
     const [feedbackError, setFeedBackError] = useState(defaultFeedbackValues.error);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [offerNotFound, setOfferNotFound] = useState(false);
 
     const { id } = useParams();
 
@@ -161,43 +164,57 @@ const OfferContact = ({OffersService}) => {
     }
 
 
+    useEffect(() => {
+        OffersService.getOfferById(id)
+        .catch(() => setOfferNotFound(true));
+    })
+
+
     return (
+        <>
+        {
+            offerNotFound
+            ?   <div className='offer-not-found-container'>
+                    <OfferNotFoundIcon />
+                    <p className='text-1'>Désolé, L'offre n'existe plus</p>
+                    <p className='text-2'>La bonne nouvelle, nous avons plein d'autres, vous les trouverais <Link className='not-found-link' to="/offers">ICI</Link></p>
+                </div>
+            :   <form className='create-offer-form' onSubmit={handleSubmit((data) => onSubmit(data, id))}>
 
-        <form className='create-offer-form' onSubmit={handleSubmit((data) => onSubmit(data, id))}>
+                    {
+                        inputs.map(input => <FormInput
+                            key={input.name}
+                            label={input.label}
+                            placeholder={input.placeholder}
+                            name={input.name}
+                            type={input.type}
+                            error={errors[input.name]}
+                            errorText={errors[input.name]?.message}
+                            register={register}
+                            registerParams={input.registerParams}
+                        />)
+                    }
 
-            {
-                inputs.map(input => <FormInput
-                    key={input.name}
-                    label={input.label}
-                    placeholder={input.placeholder}
-                    name={input.name}
-                    type={input.type}
-                    error={errors[input.name]}
-                    errorText={errors[input.name]?.message}
-                    register={register}
-                    registerParams={input.registerParams}
-                />)
-            }
+                    {
+                        feedbackSucces.displayed && <FormFeedBackSucces
+                            title={feedbackSucces.title}
+                            message={feedbackSucces.message}
+                        />
+                    }
 
-            {
-                feedbackSucces.displayed && <FormFeedBackSucces
-                    title={feedbackSucces.title}
-                    message={feedbackSucces.message}
-                />
-            }
+                    {
+                        feedbackError.display && <FormFeedBackError errors={feedbackError.errors} />
+                    }
 
-            {
-                feedbackError.display && <FormFeedBackError errors={feedbackError.errors} />
-            }
-
-            <FormButton
-                title="Créer"
-                isSubmitting={isSubmitting}
-                isValid={isValid}
-            />
-        
-        </form>
-
+                    <FormButton
+                        title="Créer"
+                        isSubmitting={isSubmitting}
+                        isValid={isValid}
+                    />
+                
+                </form>
+        }
+        </>
     )
 }
 
