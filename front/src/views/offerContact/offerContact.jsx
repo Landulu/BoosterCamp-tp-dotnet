@@ -5,41 +5,60 @@ import FormInput from '../../components/form-input/form-input';
 import FormButton from '../../components/form-button/form-button';
 import {FormFeedBackSucces, FormFeedBackError } from '../../components/form-feedback/form-feedback';
 
-import './createOffer.scss';
+import './offerContact.scss';
+import { useParams } from 'react-router-dom';
 
 const inputs = [
     {
-        label: "Titre",
-        placeholder: "e.g. PC Portable de la marque Dell",
-        name: "title",
+        label: "Prénom",
+        placeholder: "e.g. Rabah",
+        name: "firstName",
         type: "text",
         registerParams: {
-            required: "Le champ titre est obligatoire",
+            required: "Le prénom est obligatoire",
             minLength: {
-                value: 10,
-                message: "Le titre dois au moins avoir 10 caractères"
+                value: 2,
+                message: "Le champ prénom dois au moins avoir 2 caractères"
             },
             maxLength: {
-                value: 120,
-                message: "Le titre dois au maximum avoir 120 caractères"
+                value: 60,
+                message: "Le champ prénom dois au maximum avoir 60 caractères"
             }
         },
         reset: true,
     },
     {
-        label: "Description",
-        placeholder: "e.g. Ma superbe description de mon super pc Dell de l'espace, ma superbe description oup oup oup ...",
-        name: "description",
-        type: "textarea",
+        label: "Nom",
+        placeholder: "e.g. Ghiles",
+        name: "lastname",
+        type: "text",
         registerParams: {
-            required: "Le champ description est obligatoire",
+            required: "Le nom est obligatoire",
             minLength: {
-                value: 20,
-                message: "La description dois au moins avoir 20 caractères"
+                value: 2,
+                message: "La champ nom dois au moins avoir 2 caractères"
             },
             maxLength: {
-                value: 560,
-                message: "La description dois au maximum avoir 560 caractères"
+                value: 60,
+                message: "La champ nom dois au maximum avoir 60 caractères"
+            }
+        },
+        reset: true,
+    },
+    {
+        label: "Téléphone",
+        placeholder: "e.g. +",
+        name: "phone",
+        type: "number",
+        registerParams: {
+            required: "Le champ téléphone est obligatoire",
+            minLength: {
+                value: 10,
+                message: "Le champ numéro de téléphone dois au moins avoir 10 chiffres"
+            },
+            maxLength: {
+                value: 12,
+                message: "Le champ numéro de téléphone dois au plus avoir 12 chiffres"
             }
         },
         reset: true,
@@ -56,61 +75,28 @@ const inputs = [
                 message: "Le champ email est incorrect",
             }
         },
-        reset: false,
-    },
-    {
-        label: "Entreprise",
-        placeholder: "e.g. Soat",
-        name: "companyName",
-        type: "text",
-        registerParams: {
-            required: "Le champ entreprise est obligatoire",
-            minLength: {
-                value: 3,
-                message: "Le champ entreprise dois au moins avoir 3 caractères"
-            },
-            maxLength: {
-                value: 120,
-                message: "Le champ entreprise dois au maximum avoir 120 caractères"
-            }
-        },
-        reset: false,
-    },
-    {
-        label: "Adresse",
-        placeholder: "e.g. 89 Quai Panhard et Levassor, 75013",
-        name: "address",
-        type: "text",
-        registerParams: {
-            required: "Le champ adresse est obligatoire",
-            minLength: {
-                value: 10,
-                message: "Le champ adresse dois au moins avoir 10 caractères"
-            },
-            maxLength: {
-                value: 220,
-                message: "Le champ adresse dois au maximum avoir 220 caractères"
-            }
-        },
-        reset: false,
-    },
-    {
-        label: "Disponibilité",
-        placeholder: "",
-        name: "availability",
-        type: "date",
-        registerParams: {},
         reset: true,
     },
     {
-        label: "Expiration",
-        placeholder: "",
-        name: "expiration",
-        type: "date",
-        registerParams: {},
+        label: "Message",
+        placeholder: "e.g. On écrit sur les murs le nom de ceux qu'on aime, Des messages pour les jours à venir, On écrit sur les murs à l'encre de nos veines, On dessine tout ce que l'on voudrait dire...",
+        name: "message",
+        type: "textarea",
+        registerParams: {
+            required: "Le champ message est obligatoire",
+            minLength: {
+                value: 10,
+                message: "Le champ message dois au moins avoir 10 caractères"
+            },
+            maxLength: {
+                value: 550,
+                message: "Le champ entreprise dois au maximum avoir 550 caractères"
+            }
+        },
         reset: true,
     }
 ];
+
 
 const defaultFeedbackValues = {
     succes: {
@@ -124,14 +110,15 @@ const defaultFeedbackValues = {
     }
 }
 
-const CreateOfferVieuw = ({OffersService}) => {
-
+const OfferContact = ({OffersService}) => {
 
     const { register, handleSubmit, formState: {errors, isValid}, reset } = useForm({mode: 'onChange'});
 
     const [feedbackSucces, setFeedBackSucces] = useState(defaultFeedbackValues.succes);
     const [feedbackError, setFeedBackError] = useState(defaultFeedbackValues.error);
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const { id } = useParams();
 
     const resetInputs = () => {
         const inputsShouldBeReseted = {};
@@ -143,20 +130,20 @@ const CreateOfferVieuw = ({OffersService}) => {
         reset(inputsShouldBeReseted);
     }
 
-    const onSubmit = (data) => {
+    const onSubmit = (data, id) => {
         setIsSubmitting(true);
         setFeedBackSucces(defaultFeedbackValues.succes);
         setFeedBackError(defaultFeedbackValues.error);
-        OffersService.createOffer({
+
+        OffersService.contactOffer({
             ...data,
-            availability: new Date(data.availability).toISOString(),
-            expiration: new Date(data.expiration).toISOString()
-        })
+            phone: data.phone.to
+        }, id)
         .then(() => {
             setFeedBackSucces({
                 displayed: true,
-                title: "Offre crée",
-                message: "Votre offre a bien été soumise à validation, vous allez recevoir bientôt un mail pour la valider, une fois celle ci validée par vous et notre équipe, elle sera visible sur notre platforme"
+                title: "Message envoyé",
+                message: "Votre message a bien été envoyé à l'annonceur de l'offre"
             })
             resetInputs();
         })
@@ -169,7 +156,6 @@ const CreateOfferVieuw = ({OffersService}) => {
                 display: true,
                 errors: backendErrors,
             })
-
         })
         .finally(() => setIsSubmitting(false));
     }
@@ -177,7 +163,7 @@ const CreateOfferVieuw = ({OffersService}) => {
 
     return (
 
-        <form className='create-offer-form' onSubmit={handleSubmit(onSubmit)}>
+        <form className='create-offer-form' onSubmit={handleSubmit((data) => onSubmit(data, id))}>
 
             {
                 inputs.map(input => <FormInput
@@ -209,10 +195,10 @@ const CreateOfferVieuw = ({OffersService}) => {
                 isSubmitting={isSubmitting}
                 isValid={isValid}
             />
-            
+        
         </form>
+
     )
 }
 
-
-export default CreateOfferVieuw;
+export default OfferContact;

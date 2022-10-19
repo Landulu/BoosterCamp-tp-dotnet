@@ -33,6 +33,14 @@ class OffersService {
             .catch((error) => reject(error.response))
         })
     }
+
+    contactOffer(data, id) {
+        return new Promise((resolve, reject) => {
+            axios.post(`${this.#API_URL}/offers/${id}/contact`, data)
+            .then((response) => resolve(response))
+            .catch((error) => reject(error.response))
+        })
+    }
 }
 
 
