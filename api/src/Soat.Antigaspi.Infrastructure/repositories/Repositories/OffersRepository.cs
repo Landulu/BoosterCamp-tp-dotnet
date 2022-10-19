@@ -34,8 +34,8 @@ public class OffersRepository : IOffers
             Description = writeDto.Description,
             Address = writeDto.Address,
             CompanyName = writeDto.CompanyName,
-            Availability = writeDto.Availability is not null ? ToGenericTime(writeDto.Availability.Value) : null,
-            Expiration = writeDto.Expiration is not null ? ToGenericTime(writeDto.Expiration.Value) : null,
+            Availability = writeDto.Availability,
+            Expiration = writeDto.Expiration,
             Email = writeDto.Email,
             Status = writeDto.Status
 

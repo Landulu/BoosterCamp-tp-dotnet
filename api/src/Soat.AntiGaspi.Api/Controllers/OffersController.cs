@@ -1,8 +1,6 @@
 using AutoMapper;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Soat.AntiGaspi.Api.Contracts;
-using Soat.AntiGaspi.Api.Repository;
 using Soat.Antigaspi.Application.UseCases.Offers;
 using Soat.Antigaspi.Infrastructure.repositories;
 
@@ -52,9 +50,15 @@ namespace Soat.AntiGaspi.Api.Controllers
             
             CreateOfferCommand offer = _mapper.Map<CreateOfferCommand>(createOfferRequest);
 
-            var offerId = await Mediator.Send(offer);
+            var result = await Mediator.Send(offer);
 
-            return CreatedAtAction(nameof(Get), new { id = offerId }, offerId);
+            if (!result.Success)
+                return BadRequest(result.Error);
+
+            return CreatedAtAction(
+                nameof(Get), 
+                new { id = result.Value.Id }, 
+                result.Value.Id);
         }
     }
 }

@@ -34,20 +34,27 @@ public class Offer
         Status = status;
     }
 
-    public static Offer CreateNew(OfferId id, string title, string description, string email, string companyName, string address,
-        DateTimeOffset? availability, DateTimeOffset? expiration)
+    public static Result<Offer> CreateNew(OfferId id, string title, string description, string email,
+        string companyName, string address,
+        DateTimeOffset? availability, DateTimeOffset? expiration, DateTimeOffset now)
     {
-        return new Offer(
-            id, 
-            title, 
-            description, 
-            email, 
-            companyName, 
-            address, 
-            availability, 
+        if (expiration < now)
+        {
+            return new Result<Offer>(error: "expiration_passed_on_creation");
+        }
+
+        var offer = new Offer(
+            id,
+            title,
+            description,
+            email,
+            companyName,
+            address,
+            availability,
             expiration,
             OfferStatus.Pending);
+        return new Result<Offer>(value: offer);
     }
-    
-    
+
+
 }   
