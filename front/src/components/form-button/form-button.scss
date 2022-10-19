@@ -1,0 +1,80 @@
+button {
+    background-color: #1395BE;
+    height: 50px;
+    border-radius: 3px;
+    color: #ccc;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all linear .28s;
+    margin-top: 20px;
+
+    position: relative;
+
+
+    .text {
+        font-size: 14px;
+    }
+
+    .spinner {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        display: none;
+    
+        &:after {
+            content: " ";
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 5px solid #ccc;
+            border-color: #ccc transparent #ccc transparent;
+            animation: spinner-animation 1.2s linear infinite;
+        }
+    }
+    
+
+    &:hover {
+        background-color: darken(#1395BE, $amount: 10%);
+        box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: .5);
+    }
+
+
+    &[data-disabled=true] {
+        cursor: initial;
+        opacity: .6;
+        &:hover {
+            background-color: #1395BE;
+            box-shadow: none;
+        }
+        
+    }
+
+    &[data-submitting=true] {
+
+        cursor: initial;
+
+        .text {display: none;}
+        .spinner {display: flex;}
+
+        &:hover {
+            background-color: #1395BE;
+            box-shadow: none;
+        }
+    }
+
+}
+
+@keyframes spinner-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -10,6 +10,13 @@ const defaultNavbar = [
         link: "/offers",
         isActif: false,
         order: 1,
+    },
+    {
+        id: 2,
+        title: "Créer une offre",
+        link: "/offers/create",
+        isActif: false,
+        order: 2,
     }
 ];
 

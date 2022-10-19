@@ -25,6 +25,14 @@ class OffersService {
             .catch((error) => reject(error));
         })
     }
+
+    createOffer(data) {
+        return new Promise((resolve, reject) => {
+            axios.post(`${this.#API_URL}/offers`, data)
+            .then((response) => resolve(response))
+            .catch((error) => reject(error.response))
+        })
+    }
 }
 
 
