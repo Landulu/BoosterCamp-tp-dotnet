@@ -27,7 +27,7 @@ export const FormFeedBackError = ({errors}) => {
             </div>
             <ul className="errors-container">
                 {
-                    errors && errors.map(error => <li className="error-text">{error}</li> )
+                    errors && errors.map((error, index) => <li key={index} className="error-text">{error}</li> )
                 }
             </ul>
         </div> 

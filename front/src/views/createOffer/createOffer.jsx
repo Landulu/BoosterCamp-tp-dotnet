@@ -24,7 +24,8 @@ const inputs = [
                 value: 120,
                 message: "Le titre dois au maximum avoir 120 caractères"
             }
-        }
+        },
+        reset: true,
     },
     {
         label: "Description",
@@ -41,7 +42,8 @@ const inputs = [
                 value: 560,
                 message: "La description dois au maximum avoir 560 caractères"
             }
-        }
+        },
+        reset: true,
     },
     {
         label: "Email",
@@ -54,7 +56,8 @@ const inputs = [
                 value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                 message: "Le champ email est incorrect",
             }
-        }
+        },
+        reset: false,
     },
     {
         label: "Entreprise",
@@ -71,7 +74,8 @@ const inputs = [
                 value: 120,
                 message: "Le champ entreprise dois au maximum avoir 120 caractères"
             }
-        }
+        },
+        reset: false,
     },
     {
         label: "Adresse",
@@ -88,7 +92,8 @@ const inputs = [
                 value: 220,
                 message: "Le champ adresse dois au maximum avoir 220 caractères"
             }
-        }
+        },
+        reset: false,
     },
     {
         label: "Disponibilité",
@@ -98,7 +103,8 @@ const inputs = [
         registerParams: {
             // valueAsDate: "Le champ disponibilité de l'offre est incorrecte",
             // valueAsDate: true,
-        }
+        },
+        reset: true,
     },
     {
         label: "Expiration",
@@ -108,61 +114,74 @@ const inputs = [
         registerParams: {
             // valueAsDate: "Le champ expiration de l'offre est incorrecte",
             // valueAsDate: true,
-        }
+        },
+        reset: true,
     }
 ];
+
+const defaultFeedbackValues = {
+    succes: {
+        displayed: false,
+        title: "",
+        message: "",
+    },
+    error: {
+        display: false,
+        errors: [],
+    }
+}
 
 const CreateOfferVieuw = ({OffersService}) => {
 
 
-    const { register, handleSubmit, formState: {errors, isValid, isSubmitting} } = useForm({mode: 'onChange'});
+    const { register, handleSubmit, formState: {errors, isValid, isSubmitting}, reset } = useForm({mode: 'onChange'});
 
-    const [feedbackSucces, setFeedBackSucces] = useState({
-        displayed: false,
-        title: "",
-        message: "",
-    })
-    const [feedbackError, setFeedBackError] = useState({
-        display: false,
-        errors: []
-    })
+    const [feedbackSucces, setFeedBackSucces] = useState(defaultFeedbackValues.succes);
+    const [feedbackError, setFeedBackError] = useState(defaultFeedbackValues.error);
 
-    const onSubmit = (data) => {
-        OffersService.createOffer({
-            // ...data,
-            // availability: new Date(data.availability).toISOString(),
-            // expiration: new Date(data.expiration).toISOString()
-            "title": "titre de mon offer",
-            "description": "string",
-            "email": "stringgmail.com",
-            "companyName": "string",
-            "address": "string",
-            "availability": "2023-10-18T14:42:39.562Z",
-            "expiration": "2023-09-18T14:42:39.562Z"
+    const resetInputs = () => {
+        const inputsShouldBeReseted = {};
+        inputs.forEach(input => {
+            if ( input.reset ) {
+                inputsShouldBeReseted[input.name] = "";
+            }
         })
-        .then((response) => console.log(response))
-        .catch((error) => {
-            console.log(error.data.errors)
-        })
-        // setFeedBack({...feedback, display: true});
+        reset(inputsShouldBeReseted);
     }
 
-    // useEffect(() => {
-    //     if ( feedback.display ) {
-    //         const feedbackTimeout = setInterval(() => {
-    //             setFeedBack({...feedback, display: false})
-    //         }, 5000)
-    //         return () => clearTimeout(feedbackTimeout);
-    //     }
-    // }, [feedback])
+    const onSubmit = (data) => {
+        setFeedBackSucces(defaultFeedbackValues.succes);
+        setFeedBackError(defaultFeedbackValues.error);
+        OffersService.createOffer({
+            ...data,
+            availability: new Date(data.availability).toISOString(),
+            expiration: new Date(data.expiration).toISOString()
+        })
+        .then((response) => {
+            setFeedBackSucces({
+                displayed: true,
+                title: "Offre crée",
+                message: "Votre offre a bien été soumise à validation, vous allez recevoir bientôt un mail pour la valider, une fois celle ci validée par vous et notre équipe, elle sera visible sur notre platforme"
+            })
+            resetInputs();
+        })
+        .catch(({data: {errors}}) => {
+            const backendErrors = [];
+            for ( const [key, value] of Object.entries(errors) ) {
+                backendErrors.push(value[0])
+            }
+            setFeedBackError({
+                display: true,
+                errors: backendErrors,
+            })
+
+        })
+    }
 
 
     return (
-        <>
-        <button onClick={onSubmit}>Submit</button>
+
         <form className='create-offer-form' onSubmit={handleSubmit(onSubmit)}>
-
-
 
             {
                 inputs.map(input => <FormInput
@@ -191,14 +210,11 @@ const CreateOfferVieuw = ({OffersService}) => {
 
             <FormButton
                 title="Créer"
-                // isSubmitting={isSubmitting}
-                // isValid={isValid}
-                isSubmitting={false}
-                isValid={true}
+                isSubmitting={isSubmitting}
+                isValid={isValid}
             />
             
         </form>
-        </>
     )
 }
 
