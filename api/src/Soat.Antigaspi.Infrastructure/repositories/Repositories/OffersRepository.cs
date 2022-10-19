@@ -14,6 +14,16 @@ public class OffersRepository : IOffers
     {
         _context = context;
     }
+    
+    private DateTimeOffset ToLocale(DateTime dateTime)
+    {
+        return new DateTimeOffset(dateTime);
+    }
+
+    private DateTime ToGenericTime(DateTimeOffset dateTimeOffset)
+    {
+        return new DateTime(dateTimeOffset.UtcTicks);
+    }
 
     private Offer ToDataEntity(OfferWriteDto writeDto)
     {
@@ -24,9 +34,9 @@ public class OffersRepository : IOffers
             Description = writeDto.Description,
             Address = writeDto.Address,
             CompanyName = writeDto.CompanyName,
-            Availability = writeDto.Availability,
+            Availability = writeDto.Availability is not null ? ToGenericTime(writeDto.Availability.Value) : null,
+            Expiration = writeDto.Expiration is not null ? ToGenericTime(writeDto.Expiration.Value) : null,
             Email = writeDto.Email,
-            Expiration = writeDto.Expiration,
             Status = writeDto.Status
 
         };
@@ -48,6 +58,8 @@ public class OffersRepository : IOffers
         _context.Update(ToDataEntity(offer));
         await _context.SaveChangesAsync();
     }
+
+  
 
     public async Task<OfferReadDto> Get(Guid id)
     {
@@ -71,8 +83,23 @@ public class OffersRepository : IOffers
         );
     }
 
-    public ICollection<OfferReadDto> GetAll()
+    public async Task<ICollection<OfferReadDto>> GetAll()
     {
-        throw new NotImplementedException();
+        var offers = _context.Offers
+            .ToList().
+            Select( o =>new OfferReadDto(
+                o.Id,
+                o.Title,
+                o.Description,
+                o.Address,
+                o.Email,
+                o.CompanyName,
+                o.Availability,
+                o.Expiration,
+                o.Status
+            )).ToList();
+
+        return offers;
+
     }
 }

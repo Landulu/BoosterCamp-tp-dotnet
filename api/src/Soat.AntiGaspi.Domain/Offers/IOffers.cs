@@ -8,5 +8,5 @@ public interface IOffers
     public Task Insert(OfferWriteDto offer);
     public Task Update(OfferWriteDto offer);
     public Task<OfferReadDto> Get(Guid id);
-    public ICollection<OfferReadDto> GetAll();
+    public Task<ICollection<OfferReadDto>> GetAll();
 }

@@ -16,9 +16,9 @@ public class OfferResponse
 
     public string? Address { get; init; }
 
-    public DateTime? Availability { get; init; }
+    public DateTimeOffset? Availability { get; init; }
 
-    public DateTime? Expiration { get; init; }
+    public DateTimeOffset? Expiration { get; init; }
     
     public static OfferResponse From(Offer dto)
     {
@@ -34,5 +34,14 @@ public class OfferResponse
             Expiration = dto.Expiration
         };
     }
+}
 
+public class OffersResponse
+{
+    public OffersResponse(IEnumerable<OfferResponse> offers)
+    {
+        Offers = offers;
+    }
+
+    public IEnumerable<OfferResponse> Offers { get; init; }
 }

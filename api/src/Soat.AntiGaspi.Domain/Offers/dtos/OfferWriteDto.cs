@@ -2,7 +2,7 @@ namespace Soat.AntiGaspi.Domain.Offers.dtos;
 
 public class OfferWriteDto
 {
-    public OfferWriteDto(Guid id, string description, string title, string address, string email, string companyName, DateTime? availability, DateTime? expiration, OfferStatus status)
+    public OfferWriteDto(Guid id, string description, string title, string address, string email, string companyName, DateTimeOffset? availability, DateTimeOffset? expiration, OfferStatus status)
     {
         Id = id;
         Description = description;
@@ -34,8 +34,8 @@ public class OfferWriteDto
     public string Address { get; set; }
     public string Email { get; set; }
     public string CompanyName { get; set; }
-    public DateTime? Availability { get; set; }
-    public DateTime? Expiration { get; set; }
+    public DateTimeOffset? Availability { get; set; }
+    public DateTimeOffset? Expiration { get; set; }
     public OfferStatus Status { get; set; }
 }
     

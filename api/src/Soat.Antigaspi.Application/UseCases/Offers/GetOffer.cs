@@ -7,6 +7,11 @@ namespace Soat.Antigaspi.Application.UseCases.Offers;
 public class GetOfferQuery: IRequest<OfferResponse>
 {
     public Guid Id { get; set; }
+
+    public GetOfferQuery(Guid id)
+    {
+        Id = id;
+    }
 }
 
 public class GetOfferQueryHandler : IRequestHandler<GetOfferQuery, OfferResponse>

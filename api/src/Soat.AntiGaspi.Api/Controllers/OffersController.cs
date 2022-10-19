@@ -32,14 +32,18 @@ namespace Soat.AntiGaspi.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GetOfferResponse>> Get(Guid id)
         {
-            //Offer? offer = await _antiGaspiContext.Offers.FindAsync(id);
-            //if (offer is null)
-            //{
-            //    return NotFound();
-            //}
-
-            //return Ok(_mapper.Map<GetOfferResponse>(offer));
-            return Ok();
+            var offer = await Mediator.Send(new GetOfferQuery(id));
+            return Ok(GetOfferResponse.From(offer));
+        }
+        
+        [HttpGet]
+        public async Task<ActionResult<GetOffersResponse>> GetAll()
+        {
+            var offers = await Mediator.Send(new GetOffersQuery());
+            return Ok(new GetOffersResponse()
+            {
+                Offers = offers.Offers.Select( GetOfferResponse.From).ToList()
+            });
         }
 
         [HttpPost("")]
@@ -49,8 +53,6 @@ namespace Soat.AntiGaspi.Api.Controllers
             CreateOfferCommand offer = _mapper.Map<CreateOfferCommand>(createOfferRequest);
 
             var offerId = await Mediator.Send(offer);
-            //_antiGaspiContext.Add(offer);
-            //await _antiGaspiContext.SaveChangesAsync();
 
             return CreatedAtAction(nameof(Get), new { id = offerId }, offerId);
         }
