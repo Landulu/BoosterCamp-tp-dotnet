@@ -22,6 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Soat.Antigaspi.Application\Soat.Antigaspi.Application.csproj" />
       <ProjectReference Include="..\Soat.AntiGaspi.Domain\Soat.AntiGaspi.Domain.csproj" />
     </ItemGroup>
 

@@ -1,13 +1,15 @@
 using System.Reflection;
 using AutoMapper;
 using MediatR;
+using Soat.Antigaspi.Application.UseCases.Contracts.Services;
 using Soat.Antigaspi.Application.UseCases.dtos;
+using Soat.AntiGaspi.Domain;
 using Soat.AntiGaspi.Domain.Offers;
 using Soat.AntiGaspi.Domain.Offers.dtos;
 
 namespace Soat.Antigaspi.Application.UseCases.Offers;
 
-public class CreateOfferCommand : IRequest<CreatedResponse>
+public class CreateOfferCommand : IRequest<Result<OfferResponse>>
 {
     
     public string Title { get; set; } = default!;
@@ -35,38 +37,41 @@ public enum OfferStatus
     Deleted
 }
 
-public class CreateOfferCommandHandler : IRequestHandler<CreateOfferCommand, CreatedResponse>
+public class CreateOfferCommandHandler : IRequestHandler<CreateOfferCommand, Result<OfferResponse>>
 {
     
     private readonly IOffers _offers;
     
     private readonly IMapper _mapper;
+    private readonly ITimeProvider _timeProvider;
 
-    public CreateOfferCommandHandler( IMapper mapper, IOffers offers)
+    public CreateOfferCommandHandler( IMapper mapper, IOffers offers, ITimeProvider timeProvider)
     {
         _mapper = mapper;
         _offers = offers;
+        _timeProvider = timeProvider;
     }
 
-    public async Task<CreatedResponse> Handle(CreateOfferCommand request, CancellationToken cancellationToken)
+    public async Task<Result<OfferResponse>> Handle(CreateOfferCommand request, CancellationToken cancellationToken)
     {
         var id = _offers.GetNextId();
-        var newOffer = new OfferWriteDto(
-            id, 
-            request.Title, 
-            request.Description, 
-            request.Address, 
-            request.Email, 
-            request.CompanyName, 
-            request.Availability, 
-            request.Expiration, 
-            request.Status);
-        
-        await _offers.Insert(newOffer);
 
-        return new CreatedResponse()
-        {
-            Id = id
-        };
+
+        var offer = Offer.CreateNew(new OfferId(id),
+            request.Title,
+            request.Description,
+            request.Email,
+            request.CompanyName,
+            request.Address,
+            request.Availability,
+            request.Expiration,
+            _timeProvider.UtcNow());
+        
+        if (!offer.Success) return new Result<OfferResponse>(offer.Error);
+        
+        await _offers.Insert(OfferWriteDto.FromDomain(offer.Value));
+            
+        return new Result<OfferResponse>(OfferResponse.From(offer.Value));
+
     }
 }

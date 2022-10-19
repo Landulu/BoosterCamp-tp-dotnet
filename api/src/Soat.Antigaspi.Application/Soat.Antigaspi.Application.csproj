@@ -25,11 +25,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Soat.Antigaspi.Infrastructure\Soat.Antigaspi.Infrastructure.csproj" />
+      <Folder Include="UseCases\Contracts\Profiles" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="UseCases\Contracts\Profiles" />
+      <ProjectReference Include="..\Soat.AntiGaspi.Domain\Soat.AntiGaspi.Domain.csproj" />
     </ItemGroup>
 
 </Project>

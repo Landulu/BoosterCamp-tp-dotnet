@@ -41,6 +41,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Soat.Antigaspi.Application\Soat.Antigaspi.Application.csproj" />
+	  <ProjectReference Include="..\Soat.Antigaspi.Infrastructure\Soat.Antigaspi.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>
