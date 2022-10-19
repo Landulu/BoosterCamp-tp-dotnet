@@ -15,13 +15,13 @@ public class Offer
 
     public string Address { get; private set; } 
 
-    public DateTime? Availability { get; private set; }
+    public DateTimeOffset? Availability { get; private set; }
 
-    public DateTime? Expiration { get; private set; }
+    public DateTimeOffset? Expiration { get; private set; }
 
     public OfferStatus Status { get; private set; }
 
-    public Offer(OfferId id, string title, string description, string email, string companyName, string address, DateTime? availability, DateTime? expiration, OfferStatus status)
+    public Offer(OfferId id, string title, string description, string email, string companyName, string address, DateTimeOffset? availability, DateTimeOffset? expiration, OfferStatus status)
     {
         Id = id;
         Title = title;
@@ -35,7 +35,7 @@ public class Offer
     }
 
     public static Offer CreateNew(OfferId id, string title, string description, string email, string companyName, string address,
-        DateTime? availability, DateTime? expiration)
+        DateTimeOffset? availability, DateTimeOffset? expiration)
     {
         return new Offer(
             id, 

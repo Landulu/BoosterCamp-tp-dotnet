@@ -17,9 +17,9 @@ namespace Soat.AntiGaspi.Api.Contracts
 
         public string? Address { get; init; }
 
-        public DateTime? Availability { get; init; }
+        public DateTimeOffset? Availability { get; init; }
 
-        public DateTime? Expiration { get; init; }
+        public DateTimeOffset? Expiration { get; init; }
 
         public static GetOfferResponse From(OfferResponse dto)
         {
