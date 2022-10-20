@@ -17,6 +17,7 @@ const Offer = ({offer}) => {
                 <p className='company'>{offer.companyName}</p>
             </div>
             <div className="actions">
+                <Link className='link' to={`/offers/contact/${offer.id}` }>Contacter</Link>
                 <Link className='link' to={`/offers/${offer.id}` }>Détails de l'offre</Link>
             </div>
         </div>

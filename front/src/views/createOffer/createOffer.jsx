@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import FormInput from '../../components/form-input/form-input';
@@ -6,7 +6,6 @@ import FormButton from '../../components/form-button/form-button';
 import {FormFeedBackSucces, FormFeedBackError } from '../../components/form-feedback/form-feedback';
 
 import './createOffer.scss';
-import { useEffect } from 'react';
 
 const inputs = [
     {
@@ -100,10 +99,7 @@ const inputs = [
         placeholder: "",
         name: "availability",
         type: "date",
-        registerParams: {
-            // valueAsDate: "Le champ disponibilité de l'offre est incorrecte",
-            // valueAsDate: true,
-        },
+        registerParams: {},
         reset: true,
     },
     {
@@ -111,10 +107,7 @@ const inputs = [
         placeholder: "",
         name: "expiration",
         type: "date",
-        registerParams: {
-            // valueAsDate: "Le champ expiration de l'offre est incorrecte",
-            // valueAsDate: true,
-        },
+        registerParams: {},
         reset: true,
     }
 ];
@@ -134,10 +127,11 @@ const defaultFeedbackValues = {
 const CreateOfferVieuw = ({OffersService}) => {
 
 
-    const { register, handleSubmit, formState: {errors, isValid, isSubmitting}, reset } = useForm({mode: 'onChange'});
+    const { register, handleSubmit, formState: {errors, isValid}, reset } = useForm({mode: 'onChange'});
 
     const [feedbackSucces, setFeedBackSucces] = useState(defaultFeedbackValues.succes);
     const [feedbackError, setFeedBackError] = useState(defaultFeedbackValues.error);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const resetInputs = () => {
         const inputsShouldBeReseted = {};
@@ -150,6 +144,7 @@ const CreateOfferVieuw = ({OffersService}) => {
     }
 
     const onSubmit = (data) => {
+        setIsSubmitting(true);
         setFeedBackSucces(defaultFeedbackValues.succes);
         setFeedBackError(defaultFeedbackValues.error);
         OffersService.createOffer({
@@ -157,7 +152,7 @@ const CreateOfferVieuw = ({OffersService}) => {
             availability: new Date(data.availability).toISOString(),
             expiration: new Date(data.expiration).toISOString()
         })
-        .then((response) => {
+        .then(() => {
             setFeedBackSucces({
                 displayed: true,
                 title: "Offre crée",
@@ -176,6 +171,7 @@ const CreateOfferVieuw = ({OffersService}) => {
             })
 
         })
+        .finally(() => setIsSubmitting(false));
     }
 
 
