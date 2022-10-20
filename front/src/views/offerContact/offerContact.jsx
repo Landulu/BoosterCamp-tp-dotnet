@@ -9,8 +9,6 @@ import FormInput from '../../components/form-input/form-input';
 import FormButton from '../../components/form-button/form-button';
 import {FormFeedBackSucces, FormFeedBackError } from '../../components/form-feedback/form-feedback';
 
-import OfferNotFoundIcon from '../../drawables/icons/offer-not-found-icon';
-
 import './offerContact.scss';
 
 const inputs = [
@@ -23,11 +21,11 @@ const inputs = [
             required: "Le prénom est obligatoire",
             minLength: {
                 value: 2,
-                message: "Le champ prénom dois au moins avoir 2 caractères"
+                message: "Le champ prénom doit au moins avoir 2 caractères"
             },
             maxLength: {
                 value: 60,
-                message: "Le champ prénom dois au maximum avoir 60 caractères"
+                message: "Le champ prénom doit au maximum avoir 60 caractères"
             }
         },
         reset: true,
@@ -41,11 +39,11 @@ const inputs = [
             required: "Le nom est obligatoire",
             minLength: {
                 value: 2,
-                message: "La champ nom dois au moins avoir 2 caractères"
+                message: "La champ nom doit au moins avoir 2 caractères"
             },
             maxLength: {
                 value: 60,
-                message: "La champ nom dois au maximum avoir 60 caractères"
+                message: "La champ nom doit au maximum avoir 60 caractères"
             }
         },
         reset: true,
@@ -59,11 +57,11 @@ const inputs = [
             required: "Le champ téléphone est obligatoire",
             minLength: {
                 value: 10,
-                message: "Le champ numéro de téléphone dois au moins avoir 10 chiffres"
+                message: "Le champ numéro de téléphone doit au moins avoir 10 chiffres"
             },
             maxLength: {
                 value: 12,
-                message: "Le champ numéro de téléphone dois au plus avoir 12 chiffres"
+                message: "Le champ numéro de téléphone doit au plus avoir 12 chiffres"
             }
         },
         reset: true,
@@ -91,11 +89,11 @@ const inputs = [
             required: "Le champ message est obligatoire",
             minLength: {
                 value: 10,
-                message: "Le champ message dois au moins avoir 10 caractères"
+                message: "Le champ message doit au moins avoir 10 caractères"
             },
             maxLength: {
                 value: 550,
-                message: "Le champ entreprise dois au maximum avoir 550 caractères"
+                message: "Le champ entreprise doit au maximum avoir 550 caractères"
             }
         },
         reset: true,
