@@ -99,7 +99,9 @@ const inputs = [
         placeholder: "",
         name: "availability",
         type: "date",
-        registerParams: {},
+        registerParams: {
+            required: "Le champ date de disponibilité est obligatoire",
+        },
         reset: true,
     },
     {
@@ -107,7 +109,9 @@ const inputs = [
         placeholder: "",
         name: "expiration",
         type: "date",
-        registerParams: {},
+        registerParams: {
+            required: "Le champ date de disponibilité est obligatoire",
+        },
         reset: true,
     }
 ];

@@ -1,1 +1,8 @@
-.create-offer-form {}
+.create-offer-form {
+    max-width: 1024px;
+    margin: 0 auto;
+
+    @media (min-width: 960px) {
+        padding: 20px 10px;
+    }
+}
