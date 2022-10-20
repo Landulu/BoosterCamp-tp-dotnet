@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soat.Antigaspi.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soat.AntiGaspi.Domain", "Soat.AntiGaspi.Domain\Soat.AntiGaspi.Domain.csproj", "{2B2D8504-47B0-498B-9776-5A62FCA3A561}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soat.AntiGaspi.Domain.Test", "Soat.AntiGaspi.Domain.Test\Soat.AntiGaspi.Domain.Test.csproj", "{F419BCC7-2E32-47FF-9ED6-40797CB7EB13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{2B2D8504-47B0-498B-9776-5A62FCA3A561}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B2D8504-47B0-498B-9776-5A62FCA3A561}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B2D8504-47B0-498B-9776-5A62FCA3A561}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F419BCC7-2E32-47FF-9ED6-40797CB7EB13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F419BCC7-2E32-47FF-9ED6-40797CB7EB13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F419BCC7-2E32-47FF-9ED6-40797CB7EB13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F419BCC7-2E32-47FF-9ED6-40797CB7EB13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
