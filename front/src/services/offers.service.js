@@ -3,7 +3,7 @@ import axios from "axios";
 
 class OffersService {
 
-    #API_URL = "https://localhost:7201/api";
+    #API_URL = "https://app-soat-bc22-dev-fr.azurewebsites.net/api";
 
     constructor() {}
 
@@ -11,10 +11,7 @@ class OffersService {
 
         return new Promise((resolve, reject) => {
             axios.get(`${this.#API_URL}/offers`)
-            .then((response) => {
-                console.log(response)
-                resolve(response.data.offers)
-            })
+            .then((response) => resolve(response.data.items))
             .catch((error) => reject(error));
         })
 
