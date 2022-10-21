@@ -9,4 +9,5 @@ public interface IOffers
     public Task Update(OfferWriteDto offer);
     public Task<OfferReadDto> Get(Guid id);
     public Task<ICollection<OfferReadDto>> GetAll();
+    public Task<bool> Delete(OfferWriteDto offer);
 }

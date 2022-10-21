@@ -47,16 +47,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/formation/Documents/antigaspi/BoosterCamp-tp-dotnet/api/src/Soat.AntiGaspi.Domaine/Soat.AntiGaspi.Domaine.csproj&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/formation/Documents/antigaspi/BoosterCamp-tp-dotnet/api/src/Soat.AntiGaspi.Domaine/Soat.AntiGaspi.Domaine.csproj",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Soat.AntiGaspi.Api">
     <configuration name="Soat.AntiGaspi.Api" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Soat.AntiGaspi.Api/Soat.AntiGaspi.Api.csproj" />
@@ -101,6 +106,7 @@
       <workItem from="1665499743265" duration="6260000" />
       <workItem from="1665735836804" duration="34165000" />
       <workItem from="1666279143761" duration="2214000" />
+      <workItem from="1666340331788" duration="2259000" />
     </task>
     <servers />
   </component>

@@ -102,4 +102,20 @@ public class OffersRepository : IOffers
         return offers;
 
     }
+
+    public async Task<bool> Delete(OfferWriteDto offer)
+    {
+        var dbOffer = await _context.Offers.FindAsync(offer.Id);
+
+        if (dbOffer is null)
+        {
+            return false;
+        }
+
+        _context.Offers.Remove(dbOffer);
+        await _context.SaveChangesAsync();
+
+
+        return true;
+    }
 }
