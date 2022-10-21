@@ -15,11 +15,7 @@ const Offers = ({OffersService}) => {
 
     useEffect(() => {
         OffersService.getOffers()
-        .then(offers => {
-            console.log(offers)
-            offers && setOffersList(offers)
-        })
-        .catch(error => console.log(error))
+        .then(offers => offers && setOffersList(offers))
         .finally(() => setIsLoading(false));
     }, [OffersService])
 
