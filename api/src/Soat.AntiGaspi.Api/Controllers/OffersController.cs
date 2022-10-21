@@ -60,5 +60,24 @@ namespace Soat.AntiGaspi.Api.Controllers
                 new { id = result.Value.Id }, 
                 result.Value.Id);
         }
+        
+        
+        [HttpPost("{id}/activate")]
+        public async Task<IActionResult> Activate(Guid id)
+        {
+            
+            var offer = new ActivateOfferCommand{Id = id};
+
+            var result = await Mediator.Send(offer);
+
+            if (!result.Success)
+                return BadRequest(result.Error);
+
+            return CreatedAtAction(
+                nameof(Get), 
+                new { id = result.Value.Id }, 
+                result.Value.Id);
+        }
+        
     }
 }

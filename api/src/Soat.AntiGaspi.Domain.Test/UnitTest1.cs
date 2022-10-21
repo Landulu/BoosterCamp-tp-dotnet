@@ -6,7 +6,6 @@ namespace Soat.AntiGaspi.Domain.Test;
 
 public class Tests
 {
-
     private DateTimeOffset _utcNow;
     
     [SetUp]

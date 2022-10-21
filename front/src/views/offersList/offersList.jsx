@@ -15,10 +15,13 @@ const Offers = ({OffersService}) => {
 
     useEffect(() => {
         OffersService.getOffers()
-        .then(offers => offers && setOffersList(offers))
+        .then(offers => {
+            console.log(offers)
+            offers && setOffersList(offers)
+        })
         .catch(error => console.log(error))
         .finally(() => setIsLoading(false));
-    })
+    }, [OffersService])
 
 
 
