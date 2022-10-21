@@ -25,6 +25,8 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/511d4e206dae4ca0be58667fba28e4533de00/77/33dd7bff/IMapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/511d4e206dae4ca0be58667fba28e4533de00/95/c8eff407/IMapperBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Soat.AntiGaspi.Api/DependencyInjections/Extensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Soat.AntiGaspi.Domain/Offers/IOffers.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Soat.AntiGaspi.Domain/Offers/Offer.cs" root0="FORCE_HIGHLIGHTING" />
@@ -97,7 +99,8 @@
       <updated>1665499080479</updated>
       <workItem from="1665499090150" duration="628000" />
       <workItem from="1665499743265" duration="6260000" />
-      <workItem from="1665735836804" duration="5749000" />
+      <workItem from="1665735836804" duration="34165000" />
+      <workItem from="1666279143761" duration="2214000" />
     </task>
     <servers />
   </component>

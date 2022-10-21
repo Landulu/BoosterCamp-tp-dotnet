@@ -57,4 +57,23 @@ public class Offer
     }
 
 
+    public Result<Offer> Activate(DateTimeOffset now)
+    {
+        if (Status != OfferStatus.Pending)
+        {
+            return new Result<Offer>(error: "cannot_activate_not_pending_offer");
+        }
+
+        
+        if (Expiration < now)
+        {
+            return new Result<Offer>(error: "cannot_activate_already_expired_offer");
+        }
+
+        Status = OfferStatus.Active;
+
+        return new Result<Offer>(value: this);
+
+
+    }
 }   
