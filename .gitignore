@@ -212,3 +212,7 @@ front/npm-debug.log*
 front/npm-error.log*
 front/yarn-debug.log*
 front/yarn-error.log*
+
+front/.gitignore
+front/firebase.json
+front/.firebaserc
