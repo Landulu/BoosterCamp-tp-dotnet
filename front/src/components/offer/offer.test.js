@@ -1,0 +1,6 @@
+import { sliceText } from "./offer";
+
+it('slice text', () => {
+    expect("hello word !").toEqual("hello word !");
+    expect("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula sem, scelerisque a commodo vel, vulputate feugiat lectus. Suspendisse at sem finibus, euismod leo fringilla, euismod elit. Suspendisse ornare diam vel semper faucibus. Maecenas congue lacus ac lectus feugiat, tristique imperdiet augue pellentesque. Aenean est tellus, rutrum a libero et, suscipit feugiat enim. Pellentesque non augue lectus. Integer eu lacinia eros, ultrices tincidunt eros. Mauris tincidunt bibendum nisi, at porta nibh rhoncus eget. Aliquam erat volutpat. Sed sodales neque facilisis velit vestibulum, vel mattis augue euismod. Etiam ut neque nec nulla rutrum sodales. Vivamus lobortis mauris in lectus facilisis, ut vehicula orci varius.").toEqual("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula sem, scelerisque a commodo vel, vulputate feugiat lectus. Suspendisse at sem finibus, euismod leo fringilla, euismod elit. Suspendisse ornare diam vel semper faucibus. Maecenas...");
+})

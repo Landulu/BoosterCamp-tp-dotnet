@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import './offer.scss';
 
+
+export const sliceText = (text) => {
+    if ( text.length > 250 ) return `${text.slice(0,250)}...`;
+    else return text;
+}
+
 const Offer = ({offer}) => {
-
-    const sliceText = (text) => {
-        if ( text.length > 250 ) return `${text.slice(0,250)}...`;
-        else return text;
-    }
-
-
+    console.log(s.length)
     return (
         <div className="offer-item">
             <h2 className='title'>{offer.title}</h2>

@@ -18,7 +18,7 @@ const Offers = ({OffersService}) => {
         .then(offers => offers && setOffersList(offers))
         .catch(error => console.log(error))
         .finally(() => setIsLoading(false));
-    })
+    }, [OffersService])
 
 
 
