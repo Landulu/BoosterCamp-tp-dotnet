@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Soat.AntiGaspi.Api.Contracts;
@@ -62,13 +63,13 @@ namespace Soat.AntiGaspi.Api.Controllers
         }
         
         
-        [HttpPost("{id}/activate")]
+        [HttpPut("{id}/activate")]
         public async Task<IActionResult> Activate(Guid id)
         {
             
-            var offer = new ActivateOfferCommand{Id = id};
+            var cmd = new ActivateOfferCommand{Id = id};
 
-            var result = await Mediator.Send(offer);
+            var result = await Mediator.Send(cmd);
 
             if (!result.Success)
                 return BadRequest(result.Error);
@@ -77,6 +78,25 @@ namespace Soat.AntiGaspi.Api.Controllers
                 nameof(Get), 
                 new { id = result.Value.Id }, 
                 result.Value.Id);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var cmd = new DeleteOfferCommand { Id = id };
+            
+            
+            var result = await Mediator.Send(cmd);
+
+            if (!result.Success)
+                return BadRequest(result.Error);
+
+            return CreatedAtAction(
+                nameof(Get), 
+                new { id = result.Value.Id }, 
+                result.Value.Id);
+            
+            
         }
         
     }

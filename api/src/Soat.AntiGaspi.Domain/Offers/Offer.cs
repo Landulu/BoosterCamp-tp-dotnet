@@ -76,4 +76,11 @@ public class Offer
 
 
     }
+
+    public Result<Offer> CanDelete()
+    {
+        
+        return new Result<Offer>(value: this);
+
+    }
 }   
